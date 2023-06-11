@@ -18,6 +18,7 @@
   ,status todo_status not null default 'incomplete'
 );  
 ----------------------------------------------------------------------------------------------
+ALTER TABLE todo ENABLE ROW LEVEL SECURITY;
 create policy "Individuals can create todos." on todo for
   insert with check (auth.uid() = user_id);
 create policy "Individuals can view their own todos. " on todo for
