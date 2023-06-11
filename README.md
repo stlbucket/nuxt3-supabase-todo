@@ -11,4 +11,4 @@
 - copy **.env.example** to **.env.local** and populate accordingly 
 - ```npm run dev```
 
-![nuxt-supabase-todo](assets/img/nuxt-supabase-todo.png)
+![nuxt3-supabase-todo](docs/nuxt3-supabase-todo.png)
