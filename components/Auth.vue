@@ -42,6 +42,7 @@
     if (error) {
       alert(error.message)
     }
+    alert('Check your email inbox for the magic link!')
   }
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut()
