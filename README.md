@@ -10,3 +10,5 @@
 - run [build-todo-app.sql](./sql-scripts/build-todo-app.sql) in the supabase SQL editor
 - copy **.env.example** to **.env.local** and populate accordingly 
 - ```npm run dev```
+
+![nuxt-supabase-todo](assets/img/nuxt-supabase-todo.png)
