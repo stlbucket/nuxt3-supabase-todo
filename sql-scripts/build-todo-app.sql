@@ -28,6 +28,7 @@ create policy "Individuals can delete their own todos." on todo for
   delete using (auth.uid() = user_id);
 ------------------------------------------------------
 --------------------  02-public-todo-functions
+----------------------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION create_todo(_name citext)
   RETURNS todo
   LANGUAGE plpgsql
@@ -53,7 +54,7 @@ CREATE OR REPLACE FUNCTION update_todos_status(_todo_ids uuid[], _status todo_st
     update todo set status = _status, updated_at = current_timestamp where id = any(_todo_ids);
 
     return query
-    select * from todo where id = any(_todo_ids)
+      select td.* from todo_fn.update_todos_status(_todo_ids, _status) td
     ;
   end;
   $function$
@@ -69,9 +70,9 @@ CREATE OR REPLACE FUNCTION delete_todos(_todo_ids uuid[])
     _retval boolean;
     _err_concitext citext;
   BEGIN
-    delete from todo where id = any(_todo_ids);
+    _retval := (select todo_fn.delete_todos(_todo_ids));
 
-  return true;
+    return _retval;
   end;
   $$;
 ------------------------------------------------------
@@ -129,4 +130,3 @@ CREATE OR REPLACE FUNCTION todo_fn.delete_todos(_todo_ids uuid[])
     return true;
   end;
   $$;
-
