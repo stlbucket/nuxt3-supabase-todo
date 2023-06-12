@@ -1,6 +1,6 @@
 <template>
   <UCard class="todo-list-card">
-    <template #header>{{ status }}</template>
+    <template #header><span class="text-black text-3xl">{{ status }}</span></template>
     <div class="buttons">
       <UButton
         :disabled="selectedTodos.length === 0"
@@ -26,10 +26,17 @@
       show-header
       :rows="todos"
       v-model="selectedTodos"
-      :columns="[{key:'created_at',label:'Created'},{key:'name',label:'Name'}]"
+      :columns="[{key:'created_at',label:'Created'},{key:'updated_at',label:'Updated'},{key:'name',label:'Name'}]"
+      class="todo-list-table"
     >
-      <template #created_at-data="{ row }">
-        {{ useFormatDateTimeString(row.created_at) }}
+    <template #created_at-data="{ row }">
+        <span class="text-black text-sm">{{ useFormatDateTimeString(row.created_at) }}</span>
+      </template>
+      <template #updated_at-data="{ row }">
+        <span class="text-black text-sm">{{ useFormatDateTimeString(row.updated_at) }}</span>
+      </template>
+      <template #name-data="{ row }">
+        <span class="text-black text-xl">{{ row.name }}</span>
       </template>
     </UTable>
   </UCard>

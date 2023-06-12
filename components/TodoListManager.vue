@@ -10,24 +10,31 @@
       </div>
     </template>
     <div class="todo-lists">
-      <TodoList
-        status="incomplete"
-        :todos="incompleteTodos"
-        @updateTodos="updateTodos"
-        @deleteTodos="deleteTodos"
-      />
-      <TodoList
-        status="complete"
-        :todos="completeTodos"
-        @updateTodos="updateTodos"
-        @deleteTodos="deleteTodos"
-      />
-      <TodoList
-        status="archived"
-        :todos="archivedTodos"
-        @updateTodos="updateTodos"
-        @deleteTodos="deleteTodos"
-      />
+      <div class="todo-lists-current">
+        <TodoList
+          status="incomplete"
+          :todos="incompleteTodos"
+          @updateTodos="updateTodos"
+          @deleteTodos="deleteTodos"
+          class="incomplete"
+        />
+        <TodoList
+          status="complete"
+          :todos="completeTodos"
+          @updateTodos="updateTodos"
+          @deleteTodos="deleteTodos"
+          class="complete"
+        />
+      </div>
+      <div class="todo-list-archived">
+        <TodoList
+          status="archived"
+          :todos="archivedTodos"
+          @updateTodos="updateTodos"
+          @deleteTodos="deleteTodos"
+          class="archived"
+        />
+      </div>
     </div>
   </UCard>
   <UModal v-model="showModal">
@@ -60,7 +67,25 @@
 }
 .todo-lists {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.todo-lists-current {
+  display: flex;
   justify-content: space-evenly;
+}
+.todo-lists-archive {
+  display: flex;
+  justify-content: space-evenly;
+}
+.incomplete {
+  background-color: #AECFDF;
+}
+.complete {
+  background-color: #9F9FAD;
+}
+.archived {
+  background-color: #93748A;
 }
 </style>
 
